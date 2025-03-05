@@ -496,24 +496,6 @@ ap_int<Puppi::eta_t::width+1> deltaEta (Puppi::eta_t eta1, Puppi::eta_t eta2)
     return eta1 - eta2;
 }
 
-inline dr2_t deltaR2 (const Puppi & p1, const Puppi & p2)
-{
-    auto dphi = p1.hwPhi - p2.hwPhi;
-    if (dphi > Puppi::INT_PI) dphi -= Puppi::INT_2PI;
-    else if (dphi < -Puppi::INT_PI) dphi += Puppi::INT_2PI;
-    auto deta = p1.hwEta - p2.hwEta;
-    return dphi*dphi + deta*deta;
-}
-
-inline dr2_t deltaR2_slow (const Puppi & p1, const Puppi & p2)
-{
-    auto dphi = p1.hwPhi - p2.hwPhi;
-    if (dphi > Puppi::INT_PI) dphi -= Puppi::INT_2PI;
-    else if (dphi < -Puppi::INT_PI) dphi += Puppi::INT_2PI;
-    auto deta = deltaEta(p1.hwEta, p2.hwEta);
-    return dphi*dphi + deta*deta;
-}
-
 // Get min deltaR slow
 dr2_t get_min_deltaR2_slow (const Puppi p0, const Puppi p1, const Puppi p2)
 {
